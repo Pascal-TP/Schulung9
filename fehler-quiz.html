@@ -6,7 +6,7 @@
   <style>
     body { font-family: sans-serif; padding: 20px; max-width: 900px; margin: auto; }
     .hidden { display: none; }
-    h1, h2 { text-align: center; }
+    h1, h2, h3 { text-align: center; }
     label { display: block; margin: 5px 0; }
     button { margin: 10px; padding: 10px 20px; font-size: 16px; }
     #logo { max-width: 300px; margin: 20px auto; display: block; }
@@ -47,6 +47,17 @@
       margin-right: auto;
       background-color: #fff;
     }
+.translate-btn {
+      background-color:#4285F4; 
+      color:white; 
+      border:none; 
+      padding:8px 16px; 
+      border-radius:5px; 
+      font-size:14px;
+      margin:10px 0;
+      cursor:pointer;
+    }
+
   </style>
 </head>
 <body>
@@ -55,11 +66,16 @@
 <div id="start-screen">
   <img id="logo" src="logo.png" alt="Firmenlogo">
   <h1>Willkommen zum "Quiz": Unterweisung Gabelstapler</h1>
+<div style="text-align:center; margin-bottom:20px;">
+  <button class="translate-btn" onclick="openStartTextTranslate()">Google Translator</button>
+</div>
+<div id="start-text">
   <p>- Finden Sie mindestens 6 Fehler im Bild, um die Schulung zu bestehen.</p>
   <p>- Danach können Sie die Lösung einsehen. un den Nachweis drucken.</p>
  <p>- Am Ende speichern Sie bitte Ihren Schulungsnachweis und senden diesen per E-Mail an: arbeitsscherheit@tpholding.de</p>
 <p>  (Wählen Sie anstelle des Druckers "als pdf speichern" aus, um den Nachweis an einen beliebigen Ort zu speichern.)</p>
   <br>
+</div>
   <label>Datum:
     <input type="date" id="input-datum" required>
   </label><br>
@@ -73,6 +89,7 @@
 <div id="quiz-screen" class="hidden">
   <img id="logo" src="logo.png" alt="Firmenlogo">
   <h2>Finde die Fehler und klicke auf das Bild!</h2>
+<h3>(Find the mistakes and click on the picture!)</h3>
 
   <div id="spielbereich">
     <img src="quiz.jpg" alt="Fehlersuchbild" id="hauptbild">
@@ -88,19 +105,19 @@
     <div class="hotspot" style="top: 910px; left: 700px; width: 100px; height: 100px;" data-id="10"></div>
  </div>
 
-  <div id="status">Fehler gefunden: <span id="counter">0</span> / 10</div>
+  <div id="status">Fehler gefunden (error found): <span id="counter">0</span> / 10</div>
   <br>
-  <button id="weiter-button" class="hidden" onclick="zeigeLoesung()">➡ Weiter zur Lösung</button>
+  <button id="weiter-button" class="hidden" onclick="zeigeLoesung()">➡ Continue to the solution</button>
   
 </div>
 
 <!-- LÖSUNG -->
 <div id="loesung-screen" class="hidden">
   <img id="logo" src="logo.png" alt="Firmenlogo">
-  <h2>Lösungsbild</h2>
+  <h2>Lösungsbild (Solution image)</h2>
   <img src="loesung.jpg" alt="Lösungsbild" id="loesungsbild">
   <br><br>
-  <button onclick="zeigeErgebnis()">➡ Weiter zum Ergebnis</button>
+  <button onclick="zeigeErgebnis()">➡ Continue to the result</button>
 </div>
 
 <!-- ERGEBNIS -->
@@ -117,9 +134,9 @@
       <p>Mit dem Versenden der PDF-Datei bestätige ich die Schulung selbst durchgeführt und die Inhalte verstanden zu haben.</p>
  </div>
     </div>
-    <button onclick="window.print()">💾 Als PDF speichern</button>
-  <button onclick="location.reload()">🔁 Neu starten</button>
-  <button onclick="window.location.href='index.html'">Zurück zum Skript</button>
+        <button onclick="window.print()">💾 save as PDF</button>
+    <button onclick="location.reload()">🔁 start again</button>
+    <button onclick="window.location.href='index.html'">back to the script</button>
 </div>
 
 <script>
@@ -177,6 +194,14 @@
     document.getElementById("loesung-screen").classList.add("hidden");
     document.getElementById("result-screen").classList.remove("hidden");
   }
+
+function openStartTextTranslate() {
+  // Alles innerhalb des Starttext-Bereichs auswählen
+  const startText = document.getElementById("start-text").innerText;
+  const url = "https://translate.google.com/?sl=de&tl=en&text=" + encodeURIComponent(startText) + "&op=translate";
+  window.open(url, "_blank");
+}
+
 </script>
 
 </body>
