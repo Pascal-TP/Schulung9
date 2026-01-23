@@ -148,7 +148,7 @@
     datum = document.getElementById("input-datum").value;
 
     if (!name || !datum) {
-      alert("Bitte Name und Datum eingeben.");
+      alert("Bitte Name und Datum eingeben. (Please enter name and date.)");
       return;
     }
 
@@ -159,7 +159,7 @@
   }
 
   function zurueckZumStart() {
-    if (confirm("Willst du wirklich abbrechen und zum Start zurückkehren?")) {
+    if (confirm("Willst du wirklich abbrechen und zum Start zurückkehren? (Do you really want to cancel and return to the start?)")) {
       location.reload();
     }
   }
